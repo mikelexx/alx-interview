@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-import collections
 """contains interview question solution for Lockboxes """
+import collections
 
 
 def canUnlockAll(boxes):
