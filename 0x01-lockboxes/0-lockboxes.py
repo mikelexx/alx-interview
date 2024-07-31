@@ -17,6 +17,8 @@ def canUnlockAll(boxes):
     determines if all locked boxes can be
     unlocked using keys provied at zeroth box
     """
+    if not boxes or type(boxes) is not list:
+        return False
     vis_boxes = set([0])
     unlock_box(boxes, 0, len(boxes), vis_boxes)
     return len(vis_boxes) == len(boxes)
