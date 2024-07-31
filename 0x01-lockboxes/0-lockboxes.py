@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""contains interview question solution for Lockboxes """
+
+
 def unlock_box(boxes, idx, box_size, vis_boxes):
     """unlocks all the boxes it can using the keys provided
     at the box at idx position
