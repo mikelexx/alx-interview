@@ -9,7 +9,9 @@ def unlock_box(boxes, idx, box_size, vis_boxes):
 
 
 def canUnlockAll(boxes):
-    """determines if all locked boxes can be unlocked using keys provied at zeroth box
+    """
+    determines if all locked boxes can be
+    unlocked using keys provied at zeroth box
     """
     vis_boxes = set([0])
     unlock_box(boxes, 0, len(boxes), vis_boxes)
