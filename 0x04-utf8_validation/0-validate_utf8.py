@@ -36,20 +36,20 @@ def validUTF8(data: List[int]) -> bool:
     for num in data:
         bytesequence += to_eight_bytes(num)
 
-    identifiers = set(['0', '10', '110', '1110', '11110'])
+    identifiers = set(['0', '110', '1110', '11110'])
     curr_id = ''
     prev_slow = curr_slow = 0
     while curr_slow < len(bytesequence):
         curr_id += bytesequence[curr_slow]
         # print(f' curr_slow={curr_slow} curr_id = {
-        #  curr_id} sq={bytesequence[curr_slow::]}')
+        #          curr_id} sq={bytesequence[curr_slow::]}')
         if curr_slow - prev_slow >= 5 and curr_id not in identifiers:
-            print("invalid utf->", bytesequence[prev_slow::])
+            # print("invalid utf->", bytesequence[prev_slow::])
             return False
         if curr_id in identifiers:
             fast = curr_slow + (8 - len(curr_id)) + 1
             # print(f'fast_pos = {fast}')
-            for _ in range(len(curr_id) - 1):
+            for _ in range(1, len(curr_id) - 1, 1):
                 continuam = bytesequence[fast:fast + 2]
                 if continuam != '10' or fast >= len(bytesequence):
                     # print("invalid continuam-> ", bytesequence[fast::])
@@ -57,7 +57,6 @@ def validUTF8(data: List[int]) -> bool:
                 # else:
                 # print(f"process-> {bytesequence[fast: fast + 8]} ")
                 fast += 8
-            fast += 8
             curr_id = ''
             curr_slow = prev_slow = fast
         else:
