@@ -22,7 +22,7 @@ def to_eight_bytes(n: int) -> str:
     return res
 
 
-def validUTF8(data: List[int]) -> bool:
+def validUTF8(data):
     """
      determines if a given data set represents a valid UTF-8 encoding.
         A character in UTF-8 can be 1 to 4 bytes long
