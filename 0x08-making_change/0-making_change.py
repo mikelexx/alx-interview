@@ -8,10 +8,12 @@ solution that is not only correct but also efficient.
 """
 
 
-def helper(sorted_coins, max_idx, total, count):
+def helper(sorted_coins, max_idx, total, count, mem):
     """ finds the minimum number of coins
     needed to get to total else -1 if not possible
     """
+    if (max_idx, total) in mem:
+        return mem[(max_idx, total)]
     if (max_idx < 0):
         return -1
     while (max_idx >= 0):
@@ -23,7 +25,9 @@ def helper(sorted_coins, max_idx, total, count):
             max_idx -= 1
         count += 1
         total = rem
-    return helper(sorted_coins, max_idx - 1, total, count)
+    res = helper(sorted_coins, max_idx - 1, total, count, mem)
+    mem[(max_idx, total)] = res
+    return res
 
 
 def makeChange(coins, total):
@@ -43,4 +47,4 @@ def makeChange(coins, total):
     if total == 0:
         return 0
     sorted_coins = sorted(coins)
-    return helper(sorted_coins, len(coins) - 1, total, 1)
+    return helper(sorted_coins, len(coins) - 1, total, 1, {})
