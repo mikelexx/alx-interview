@@ -8,6 +8,29 @@ solution that is not only correct but also efficient.
 """
 
 
+def helper(sorted_coins, max_idx, total, count):
+    """ finds the minimum number of coins
+    needed to get to total else -1 if not possible
+    """
+    temp_total = total
+    temp_count = count
+    temp_max_idx = max_idx
+    if (max_idx < 0):
+        return -1
+    while (max_idx >= 0):
+        biggest = sorted_coins[max_idx]
+        if total < biggest:
+            max_idx -= 1
+            continue
+        rem = total - biggest
+        count += 1
+        if rem == 0:
+            return count
+        total = rem
+    res = helper(sorted_coins, temp_max_idx - 1, temp_total, temp_count)
+    return res
+
+
 def makeChange(coins, total):
     """
     Given a pile of coins of different values,
@@ -22,11 +45,7 @@ def makeChange(coins, total):
     Constraint: assumes you have an infinite number of
     each denomination of coin in the list
     """
-    dp = [float("infinity")] * (total + 1)
-    dp[0] = 0
-    for coin in coins:
-        for i in range(coin, total + 1):
-            dp[i] = min(dp[i], dp[i - coin] + 1)
-    if dp[total] != float('inf'):
-        return dp[total]
-    return -1
+    if total == 0:
+        return 0
+    sorted_coins = sorted(coins)
+    return helper(sorted_coins, len(coins) - 1, total, 0)
